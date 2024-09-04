@@ -27,3 +27,14 @@ func CreateUser(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"data": user})
 }
+
+// find a single user by ID
+func FindUserById(c *gin.Context) {
+	var user models.User
+	id := c.Param("id")
+	if err := config.DB.Where("id = ?", id).First(&user).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"data": user})
+}
