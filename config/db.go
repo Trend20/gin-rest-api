@@ -19,7 +19,7 @@ func InitDB() {
 	}
 
 	//migrate the database schema
-	err = database.AutoMigrate(&models.Book{})
+	err = database.AutoMigrate(&models.Book{}, &models.User{})
 
 	if err != nil {
 		return

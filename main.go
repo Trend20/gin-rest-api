@@ -1,23 +1,25 @@
 package main
 
 import (
-	"fmt"
+	"github.com/Trend20/gin-rest-api/config"
+	"github.com/Trend20/gin-rest-api/controllers"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 func main() {
-	fmt.Println("Simple RESTful API built using  Gin and GORM")
-
 	//	initialize a router
 	router := gin.Default()
 
-	//simple test route
-	router.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
+	//call the init DB function
+	config.InitDB()
+
+	//APPLICATION ROUTES
+
+	//book routes
+	router.GET("/books", controllers.FindAllBooks)
+
+	//user routes
+	router.GET("/users", controllers.FindAllUsers)
 
 	router.Run(":3000")
 }
