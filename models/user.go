@@ -13,3 +13,10 @@ type CreateUserInput struct {
 	Location string `json:"location" binding:"required"`
 	Role     string `json:"role" binding:"required"`
 }
+
+type UpdateUserInput struct {
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Location string `json:"location"`
+	Role     string `json:"role"`
+}
