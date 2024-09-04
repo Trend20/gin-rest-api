@@ -29,3 +29,17 @@ func CreateBook(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"data": book})
 }
+
+// FindSingleBook
+func FindSingleBook(c *gin.Context) {
+	var book models.Book
+	//with error handling
+	if err := config.DB.Where("id = ?", c.Param("id")).First(&book).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
+		return
+	}
+	//without error handling
+	//config.DB.First(&book, c.Param("id"))
+
+	c.JSON(http.StatusOK, gin.H{"data": book})
+}
