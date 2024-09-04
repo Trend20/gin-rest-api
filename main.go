@@ -17,9 +17,11 @@ func main() {
 
 	//book routes
 	router.GET("/books", controllers.FindAllBooks)
+	router.POST("/books", controllers.CreateBook)
 
 	//user routes
 	router.GET("/users", controllers.FindAllUsers)
+	router.POST("/users", controllers.CreateUser)
 
 	router.Run(":3000")
 }
