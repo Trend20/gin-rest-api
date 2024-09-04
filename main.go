@@ -18,10 +18,12 @@ func main() {
 	//book routes
 	router.GET("/books", controllers.FindAllBooks)
 	router.POST("/books", controllers.CreateBook)
+	router.GET("/books/:id", controllers.FindSingleBook)
 
 	//user routes
 	router.GET("/users", controllers.FindAllUsers)
 	router.POST("/users", controllers.CreateUser)
+	router.POST("/users/:id", controllers.FindUserById)
 
 	router.Run(":3000")
 }
