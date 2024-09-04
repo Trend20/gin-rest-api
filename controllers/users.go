@@ -58,5 +58,19 @@ func UpdateUser(c *gin.Context) {
 
 	config.DB.Model(&user).Updates(input)
 	c.JSON(http.StatusOK, gin.H{"data": user})
+}
 
+// DeleteUser
+func DeleteUser(c *gin.Context) {
+	//get the user model
+	var user models.User
+	id := c.Param("id")
+	if err := config.DB.Where("id = ?", id).First(&user).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
+		return
+	}
+
+	//delete user from DB
+	config.DB.Delete(&user)
+	c.JSON(http.StatusOK, gin.H{"data": true})
 }
